@@ -22,7 +22,7 @@ for (let i = 10; i > 0; i--) {
 
 // 4. Print the word "Yes" 5 times. Repeat using a loop.
 
-for (let i = 1; i < 6; i++) {
+for (let i = 0; i < 5; i++) {
   console.log("Yes");
 }
 
@@ -30,36 +30,52 @@ for (let i = 1; i < 6; i++) {
 // For each number, check: even -> "Even", else -> "Odd".
 
 for (let i = 1; i < 11; i++) {
-  if (i % 2 === 0) console.log(`${i} is Even`);
-  else console.log(`${i} is Odd`);
+  if (i % 2 !== 0) {
+    console.log(`${i} is Odd`);
+  } else {
+    console.log(`${i} is Even`);
+  }
 }
 
 // 6. Ask user for a number and say if it's positive or negative.
 // Use prompt and a conditional.
 
-let numString = prompt("Enter a number: ");
-let num = Number(numString);
-if (num > 0) console.log("Number is positive");
-else if (num === 0) console.log("Number is zero");
-else console.log("Number is negative");
+let num = prompt("Enter a number: ");
+
+if (num === null) {
+  console.error("You pressed cancel");
+} else {
+  if (num.trim() === "") {
+    console.error("Please enter a number");
+  } else {
+    num = Number(num);
+    if (isNaN(num)) {
+      console.error("Please enter a valid number");
+    } else {
+      if (num >= 0) console.log(`${num} is positive number`);
+      else console.log(`${num} is negative number`);
+    }
+  }
+}
 
 // 7. Ask user’s age and check if eligible to vote
 // If age >= 18 → “Eligible”, else → “Not eligible”
 
 let age = prompt("Enter your age: ");
+
 if (age === null) {
   console.error("You pressed cancel");
 } else {
   if (age.trim() === "") {
-    console.error("Please write something...");
+    console.error("Please enter an age");
   } else {
     age = Number(age);
     if (isNaN(age)) {
-      console.error("Please enter a number");
+      console.error("Please enter a valid age");
     } else {
-      if (age < 0) console.log("Not valid");
-      else if (age >= 18 && age < 100) console.log("Eligible to vote");
-      else console.log("Not eligible to vote");
+      if (age >= 18 && age < 151) console.log("Eligible to vote");
+      else if (age < 18 && age >= 0) console.log("Not eligible to vote");
+      else console.log("Not a valid age");
     }
   }
 }
@@ -74,28 +90,28 @@ for (let i = 1; i < 11; i++) {
 // 9. Count how many numbers between 1 and 15 are greater than 8
 // Loop and count conditionally.
 
-let count = 0;
-for (let i = 1; i < 16; i++) {
+let total = 0;
+for (let i = 1; i <= 15; i++) {
   if (i > 8) {
-    count++;
+    total++;
   }
 }
-console.log(`Total count is ${count}`);
-
+console.log(total);
 
 // 10. Ask user for password and print access status
 // Hardcoded correct password.Compare with user input.
 
-let password = "mypassword";
-let userPassword = prompt("Enter your password: ");
-if (userPassword === null) {
-  console.error("You pressed cancel");
+let pass = "mypass";
+let userPass = prompt("Enter your password: ");
+
+if (userPass === null) {
+  console.error('You pressed cancel');
 } else {
-  if (userPassword.trim() === "") {
-    console.error("Please enter a valid password");
+  if (userPass.trim() === "") {
+    console.error("Please enter a password");
   } else {
-    if (userPassword === password) console.log("Correct password");
-    else console.log("Incorrect password");
+    if (userPass === pass) console.log("Access granted");
+    else console.log("Access denied");
   }
 }
 
@@ -104,53 +120,45 @@ if (userPassword === null) {
 // 11. Allow only 3 attempts to enter correct password
 // If user gets it right early, stop.If not → “Account locked”
 
-let attempt = 0;
-let password2 = "mypassword";
-let userPassword2 = prompt("Enter your password: ");
-attempt++;
+let attempts = 0;
+let password = "mypass";
+let userPassword = prompt("Enter your password: ");
+attempts++;
 
-while (attempt < 3 && password2 !== userPassword2) {
-  userPassword2 = prompt("Enter your password: ");
-  attempt++;
+while (userPassword !== password && attempts < 3) {
+  userPassword = prompt("Enter your password: ");
+  attempts++;
 }
 
-if (attempt === 3 && password2 !== userPassword2) {
-  console.error("Account Locked");
-} else {
-  console.log("Done");
-}
+if (attempts === 3 && userPassword !== password) console.error("Account Locked");
+else console.log("Access granted");
 
 // 12. Ask user for words until they type “stop”. Count how many times they typed “yes”
 // Loop until "stop" is typed.Count "yes".
 
-let counter = 0;
-let word = prompt("Enter your word: ");
+let yesCount = 0;
+let word = prompt("Enter the word: ");
 
 while (word !== "stop") {
-  if (word === "yes") counter++;
-  word = prompt("Enter your word: ");
+  word = prompt("Enter the word: ");
+  if (word === "yes") yesCount++;
 }
 
-console.log(`Total times yes count: ${counter}`);
+console.log(`Total yes count: ${yesCount}`);
 
 // 13. Print numbers divisible by 7 from 1 to 50
 // Use modulo % and loop.
 
 for (let i = 1; i < 51; i++) {
-  if (i % 7 === 0) {
-    console.log(i);
-  }
+  if (i % 7 === 0) console.log(i);
 }
 
 // 14. Sum of all odd numbers from 1 to 30
 // Add only odd numbers.Print final sum.
 
 let sum = 0;
-for (let i = 0; i < 31; i++) {
-  if (i % 2 !== 0) {
-    console.log(i);
-    sum += i;
-  }
+for (let i = 1; i <= 30; i++) {
+  if (i % 2 !== 0) sum += i;
 }
 console.log(sum);
 
@@ -158,18 +166,20 @@ console.log(sum);
 // Use while loop.Stop only if input is even.
 
 let userNumber = Number(prompt("Enter a number: "));
+
 while (userNumber % 2 !== 0) {
+  console.log(`${userNumber} is an Odd number`);
   userNumber = Number(prompt("Enter a number: "));
 }
-
-console.log(`${userNumber} is an even number`);
-
+console.log(`${userNumber} is an Even number`);
 
 // 16. Print numbers between two user inputs
 // Input start and end using prompt() → print all between.
 
-let start = Number(prompt("Enter start number: "));
-let end = Number(prompt("Enter end number: "));
+let start = Number(prompt("Enter the start number: "));
+let end = Number(prompt("Enter the end number: "));
+
+if (start > end) console.error("Start number should be less than end number");
 for (let i = start; i <= end; i++) {
   console.log(i);
 }
@@ -177,25 +187,27 @@ for (let i = start; i <= end; i++) {
 // 17. Print only first 3 odd numbers from 1 to 20
 // Use loop.Stop with break after 3 odd prints.
 
-let count2 = 0;
-for (let i = 0; i < 21; i++) {
-  if (count2 === 3) break;
+let count = 0;
+
+for (let i = 1; i < 21; i++) {
   if (i % 2 !== 0) {
+    if (count === 3) break;
     console.log(i);
-    count2++;
+    count++;
   }
 }
 
 // 18. Ask user 5 numbers.Count how many are positive
 // Use loop + condition + counter.
 
-let counter2 = 0;
+let counter = 0;
+
 for (let i = 1; i < 6; i++) {
-  let num = Number(prompt("Enter a number: "));
-  if (num >= 0) counter2++;
+  let num = Number(prompt("Enter number:"));
+  if (num >= 0) counter++;
 }
 
-console.log(counter2);
+console.log(counter);
 
 // 19. ATM Simulator – Allow 3 withdrawals
 // Start with ₹1000 balance.Ask withdrawal amount 3 times.
@@ -203,21 +215,19 @@ console.log(counter2);
 // Else → print “Insufficient balance”
 
 let balance = 1000;
+let withdrawalCount = 0;
 let flag = false;
-let counter3 = 0;
 
-while (balance > 0 && counter3 !== 3) {
-  let withdraw = +prompt("Enter withdrawal amount: ");
-  counter3++;
-  if (withdraw <= balance) balance -= withdraw;
+while (withdrawalCount !== 3 && balance > 0) {
+  let amount = Number(prompt("Enter the withdrawal amount: "));
+  withdrawalCount++;
+  if (amount <= balance) balance -= amount;
   else {
     flag = true;
     break;
   }
 }
 
-if (flag === true) {
-  console.error("Insufficient balance");
-}
+if (flag === true) console.error("Insufficient balance");
 
 console.log(`Balance: ${balance}`);
