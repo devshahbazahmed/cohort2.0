@@ -10,7 +10,7 @@ plusButton.addEventListener("click", () => {
 });
 
 minusButton.addEventListener("click", () => {
-  if (count <= 0) return;
   count--;
+  if (count < 0) count = 0;
   h3.innerHTML = count;
 });
