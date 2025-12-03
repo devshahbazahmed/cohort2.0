@@ -19,6 +19,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	gap: 50px;
 }
 /*
 #box1 {
@@ -522,7 +523,7 @@ section {
 	border-radius: 10px;
 } */
 
-@property --bgColor {
+/* @property --bgColor {
 	syntax: '<color>';
 	initial-value: rgb(255, 0, 255);
 	inherits: false;
@@ -547,4 +548,34 @@ section {
 	height: 300px;
 	background-color: var(--bgColor);
 	animation: changeBgColor 5s infinite forwards alternate;
+} */
+
+.box {
+	width: 300px;
+	height: 300px;
+}
+
+.red {
+	background-color: red;
+}
+
+.blue {
+	background-color: blue;
+}
+
+.green {
+	background-color: green;
+}
+
+.box:hover {
+	transform: scale(1.2) !important;
+	cursor: pointer;
+	transition: 0.5s !important;
+	opacity: 1 !important;
+}
+
+body:has(.box:hover) .box {
+	transform: scale(0.8);
+	transition: all 0.3s linear;
+	opacity: 0.7;
 }
