@@ -1,7 +1,7 @@
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
-}
+// function Person(name, age) {
+//   this.name = name;
+//   this.age = age;
+// }
 
 function Car(make, model) {
   this.make = make;
@@ -45,5 +45,28 @@ function Drink(name) {
   this.name = name;
 }
 
-const tea = new Drink("tea");
-const coffee = Drink("Coffee");
+// const tea = new Drink("tea");
+// const coffee = Drink("Coffee");
+
+// Task 1: Create Functional Constructor:
+// Create a functional constructor Person that takes name and age as parameters. Add a method `greet()` to the constructor that returns "Hello, my name is [name]".
+
+// Task 2: Handle Errors:
+// Modify the Person constructor to throw an error if the age is not a positive number.
+
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+
+  if (age < 0) {
+    throw new Error("Age must be a positive number");
+  }
+  this.greet = function () {
+    return `Hello, my name is ${this.name}`;
+  };
+}
+
+let p1 = new Person("Hitesh", -34);
+console.log(p1.name, p1.age);
+console.log(p1.greet());
+
