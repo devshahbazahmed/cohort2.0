@@ -21,10 +21,26 @@ function swapNumbers(a, b) {
 }
 
 // Calculate Compound Interest
-// Amount = Principal * 
 
 function calculateCompoundInterest(P, r, t, n) {
   const amount = P * Math.pow((1 + r / n), (n * t));
   const CI = amount - P;
   return CI.toFixed(2);
 }
+
+// Operators
+
+let x = 5;
+x += 3 * 2;
+console.log(x);
+
+let a = 50;
+a /= 5 - 2;
+console.log(a);
+
+let y = 7;
+y += 2;
+y *= 3;
+y -= 4;
+y %= 5;
+console.log(y);
