@@ -299,3 +299,40 @@ console.log(circleArea.area());
 
 let rectArea = new Rectangle(10, 20);
 console.log(rectArea.area());
+
+class User {
+  constructor(name, address, username, email) {
+    this.name = name;
+    this.address = address;
+    this.username = username;
+    this.email = email;
+    this.role = "user";
+  }
+
+  checkRole() {
+    return `Your role is ${this.role}`;
+  }
+
+  write(text) {
+    let h1 = document.createElement("h1");
+    h1.textContent = `${this.name} : ${text}`;
+    document.body.appendChild(h1);
+  }
+}
+
+class Admin extends User {
+  constructor(name, address, username, email) {
+    super(name, address, username, email);
+    this.role = "admin";
+  }
+
+  remove() {
+    document.querySelectorAll("h1").forEach((elem) => {
+      elem.remove();
+    });
+  }
+}
+
+let u1 = new User("Tyson", "India", "tyson123", "tyson@gmail.com");
+let u2 = new User("Kai", "Russia", "kai890", "kai@gmail.com");
+let a1 = new Admin("Max", "Georgia", "max123", "max@gmail.com");

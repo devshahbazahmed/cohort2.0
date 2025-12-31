@@ -97,4 +97,3 @@ function fnc3(a, b, c) {
 
 const newFnc = fnc3.bind(obj5, 1, 2, 3);
 newFnc();
-
