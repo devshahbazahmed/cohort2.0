@@ -123,4 +123,4 @@ jobs.forEach((job) => {
 });
 
 
-main.innerHTML = sum;;
+main.innerHTML = sum;
