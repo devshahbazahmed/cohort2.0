@@ -52,6 +52,9 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: var(--background-color);
 }
 nav button {
   background-color: var(--bg-button-color);
@@ -73,6 +76,7 @@ section {
 section .task-column {
   background-color: var(--bg-button-color);
   flex-grow: 1;
+  width: 100%;
   padding: var(--padding-md);
   display: flex;
   flex-direction: column;
@@ -116,7 +120,7 @@ section .task-column.hover-over {
   width: 100vw;
   top: 0;
   left: 0;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -157,4 +161,8 @@ section .task-column.hover-over {
   width: -moz-fit-content;
   width: fit-content;
   align-self: center;
+}
+
+.modal.active {
+  display: flex;
 }/*# sourceMappingURL=style.css.map */
