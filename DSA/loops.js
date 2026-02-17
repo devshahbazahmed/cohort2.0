@@ -60,7 +60,7 @@ function factorial(n) {
 // console.log(factorial(0));
 // console.log(factorial(-10));
 
-// Print all factors of a number 
+// Print all factors of a number
 
 function printFactors(n) {
   for (let i = 1; i <= n; i++) {
@@ -83,7 +83,7 @@ function sumEvenOddInRange(start, end) {
   let sumOfOdd = 0;
 
   for (let i = start; i <= end; i++) {
-    if (i % 2 === 0 ) {
+    if (i % 2 === 0) {
       sumOfEven += i;
     } else {
       sumOfOdd += i;
@@ -111,4 +111,76 @@ let count = 0;
 for (let i = 2; i <= 20; i += 3) {
   count++;
 }
-console.log(count);
+// console.log(count);
+
+// Check if a number is Prime
+
+function isPrime(num) {
+  if (num <= 1) return "Not Prime";
+  if (num === 2) return "Prime";
+  if (num % 2 === 0) return "Not Prime";
+
+  for (let i = 3; i * i <= num; i += 2) {
+    if (num % i === 0) return "Not Prime";
+  }
+
+  return "Prime";
+}
+
+// console.log(isPrime(7));
+// console.log(isPrime(10));
+// console.log(isPrime(9));
+// console.log(isPrime(15));
+
+// let i = 10;
+// while (i % 3 !== 0) {
+//   console.log(i);
+//   i--;
+// }
+
+// x = 5;
+// while x:
+// print(x)
+// x-=1
+
+// Calculate Power of a Number
+
+function calculatePower(a, b) {
+  let calculatedPower = Math.pow(a, b);
+  return calculatedPower;
+}
+
+// console.log(calculatePower(2, 3));
+// console.log(calculatePower(5, 0));
+
+// Check if a Number is Strong
+
+function isStrongNumber(n) {
+  let sum = 0;
+  let arr = String(n).split("").map(Number);
+
+  for (let i = 0; i < arr.length; i++) {
+    sum += factorial(arr[i]);
+  }
+
+  if (sum === n) return "Yes";
+  else return "No";
+}
+
+function factorial(n) {
+  let result = 1;
+  for (let i = 1; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+
+// console.log(isStrongNumber(145));
+// console.log(isStrongNumber(123));
+
+let x = 1;
+while (true) {
+  console.log(x);
+  x++;
+  if (x > 3) break;
+}
