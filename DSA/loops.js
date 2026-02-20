@@ -178,9 +178,54 @@ function factorial(n) {
 // console.log(isStrongNumber(145));
 // console.log(isStrongNumber(123));
 
-let x = 1;
-while (true) {
-  console.log(x);
-  x++;
-  if (x > 3) break;
+// let x = 1;
+// while (true) {
+//   console.log(x);
+//   x++;
+//   if (x > 3) break;
+// }
+
+// Sum of digits of a number
+
+function sumOfDigits(n) {
+  let sum = 0;
+  let index = 0;
+  const stringN = String(n).split("").join("");
+  while (index < stringN.length) {
+    sum += Number(stringN[index]);
+    index++;
+  }
+  return sum;
 }
+
+// console.log(sumOfDigits(936));
+// console.log(sumOfDigits(1234));
+
+// Check if a number is automorphic
+
+function isAutomorphic(n) {
+  n = String(n);
+  const square = String(Math.pow(n, 2));
+  if (square.endsWith(n)) return "Yes";
+  else return "No";
+}
+
+// console.log(isAutomorphic(25));
+// console.log(isAutomorphic(5));
+// console.log(isAutomorphic(7));
+
+// Reverse a Number
+
+function reverseNumber(n) {
+  let rev = 0;
+
+  while (n > 0) {
+    rev = rev * 10 + (n % 10);
+    n = Math.floor(n / 10);
+  }
+  return rev;
+}
+
+// console.log(reverseNumber(1234));
+// console.log(reverseNumber(1005));
+// console.log(reverseNumber(589));
