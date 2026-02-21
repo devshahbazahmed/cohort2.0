@@ -119,25 +119,25 @@
 
 ## Conditionals
 
-51. Write a function that takes a number as input and returns whether it is "even" or "odd".
+51. Return "positive", "negative" or "zero" for a number.
 
-52. Create a function that calculates and returns the area of a circle given its radius.
+52. Convert Celcius to Fahrenheit using a function.
 
-53. Write a function that takes an array of numbers and returns the sum of all elements in the array.
+53. Return the average of numbers in an array.
 
-54. Write a function that checks whether a given string starts with a specified character. Return `true` or `false`.
+54. Check if a string is a palindrome.
 
-55. Create a function that takes two numbers and returns the larger of the two.
+55. Check whether a number is prime.
 
-56. Write a recursive function that calculates and returns the factorial of a given number.
+56. Count total words in a sentence.
 
-57. Write a function that reverses a string and returns the reversed version.
+57. Return the longest word from a string.
 
-58. Create a function that accepts an array of numbers and returns the largest number in the array.
+58. Remove falsy values from an array.
 
-59. Write a function that converts a string into kebab-case (all lowercase words separated by hyphens).
+59. Convert a string to camelCase.
 
-60. Write a function named `helloWorld` that prints "Hello World" to the console.
+60. Generate a random number between two values.
 
 ## Objects
 
@@ -231,4 +231,3 @@
 99. Access a button with the ID `toggleButton` and add a click event listener that toggles the button’s background color between blue and red.
 
 100. Write a function that checks whether all numbers in an array are greater than a given value using the `.every()` method.
-
