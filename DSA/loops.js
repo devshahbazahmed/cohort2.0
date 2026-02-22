@@ -115,17 +115,17 @@ for (let i = 2; i <= 20; i += 3) {
 
 // Check if a number is Prime
 
-function isPrime(num) {
-  if (num <= 1) return "Not Prime";
-  if (num === 2) return "Prime";
-  if (num % 2 === 0) return "Not Prime";
+// function isPrime(num) {
+//   if (num <= 1) return "Not Prime";
+//   if (num === 2) return "Prime";
+//   if (num % 2 === 0) return "Not Prime";
 
-  for (let i = 3; i * i <= num; i += 2) {
-    if (num % i === 0) return "Not Prime";
-  }
+//   for (let i = 3; i * i <= num; i += 2) {
+//     if (num % i === 0) return "Not Prime";
+//   }
 
-  return "Prime";
-}
+//   return "Prime";
+// }
 
 // console.log(isPrime(7));
 // console.log(isPrime(10));
@@ -229,3 +229,125 @@ function reverseNumber(n) {
 // console.log(reverseNumber(1234));
 // console.log(reverseNumber(1005));
 // console.log(reverseNumber(589));
+
+// Harshad Number (Niven Number) Check
+
+function isHarshad(nStr) {
+  nStr = String(nStr);
+  let sumOfnStr = 0;
+  const splitnStr = nStr.split("");
+
+  for (let i = 0; i < splitnStr.length; i++) {
+    sumOfnStr += Number(splitnStr[i]);
+  }
+
+  if (nStr % sumOfnStr === 0) return "Harshad Number";
+  else return "Not Harshad Number";
+}
+
+// console.log(isHarshad(18));
+// console.log(isHarshad(20));
+// console.log(isHarshad(10));
+// console.log(isHarshad(21));
+
+// Abundant Number Checker
+
+function isAbundant(nStr) {
+  let index = 1;
+  const divisors = [];
+  while (index < nStr) {
+    if (nStr % index === 0) {
+      divisors.push(index);
+    }
+    index++;
+  }
+
+  let sumOfDivisors = 0;
+
+  for (let i = 0; i < divisors.length; i++) {
+    sumOfDivisors += divisors[i];
+  }
+
+  if (sumOfDivisors > nStr) return "Yes";
+  else return "No";
+}
+
+// console.log(isAbundant(12));
+// console.log(isAbundant(15));
+// console.log(isAbundant(18));
+// console.log(isAbundant(28));
+
+// Finding Prime Factors of a Number
+
+function primeFactors(nStr) {
+  nStr = Number(nStr);
+  if (nStr === 0 || nStr === 1) {
+    return "No prime factors";
+  }
+
+  function isPrimeNumber(num) {
+    if (num <= 1) return false;
+
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return false;
+    }
+    return true;
+  }
+
+  const factors = [];
+  for (let i = 2; i <= nStr; i++) {
+    while (nStr % i === 0) {
+      if (isPrimeNumber(i)) {
+        factors.push(i);
+      }
+      nStr /= i;
+    }
+  }
+
+  let result = "";
+
+  for (const f of factors) {
+    result += f + "\n";
+  }
+  return result;
+}
+
+// console.log(primeFactors(0));
+// console.log(primeFactors(1));
+// console.log(primeFactors(60));
+// console.log(primeFactors(45));
+
+// Check if a number is a Neon Number:
+
+function isNeonNumber(nStr) {
+  nStr = Number(nStr);
+  let squareNum = nStr * nStr;
+  let sumOfSquare = 0;
+  squareNum = String(squareNum);
+  for (let i = 0; i < squareNum.length; i++) {
+    sumOfSquare += Number(squareNum[i]);
+  }
+  if (sumOfSquare === nStr) return "Yes";
+  else return "No";
+}
+
+// console.log(isNeonNumber(9));
+// console.log(isNeonNumber(10));
+
+// Armstrong Number Checker
+
+function isArmstrong(nStr) {
+  nStr = String(nStr);
+  let armstrongNum = 0;
+  for (let i = 0; i < nStr.length; i++) {
+    armstrongNum += Math.pow(nStr[i], nStr.length);
+  }
+  nStr = Number(nStr);
+  if (armstrongNum === nStr) return "Armstrong";
+  else return "Not Armstrong";
+}
+
+console.log(isArmstrong(153));
+console.log(isArmstrong(370));
+console.log(isArmstrong(9474));
+console.log(isArmstrong(2));
