@@ -8,8 +8,8 @@ function printNaturalNumber(n) {
   process.stdout.write("\n");
 }
 
-// console.log(printNaturalNumber(5));
-// console.log(printNaturalNumber(10));
+console.log(printNaturalNumber(5));
+console.log(printNaturalNumber(10));
 
 // Print Natural Numbers from N to 1
 
@@ -21,8 +21,8 @@ function printNto1(n) {
   process.stdout.write("\n");
 }
 
-// console.log(printNto1(5));
-// console.log(printNto1(10));
+console.log(printNto1(5));
+console.log(printNto1(10));
 
 // Sum upto N Numbers
 
@@ -34,8 +34,8 @@ function sumUptoN(n) {
   return sum;
 }
 
-// console.log(sumUptoN(5));
-// console.log(sumUptoN(10));
+console.log(sumUptoN(5));
+console.log(sumUptoN(10));
 
 // Factorial of a Number
 
@@ -54,11 +54,11 @@ function factorial(n) {
   }
 }
 
-// console.log(factorial(5));
-// console.log(factorial(10));
-// console.log(factorial(50));
-// console.log(factorial(0));
-// console.log(factorial(-10));
+console.log(factorial(5));
+console.log(factorial(10));
+console.log(factorial(50));
+console.log(factorial(0));
+console.log(factorial(-10));
 
 // Print all factors of a number
 
@@ -72,9 +72,9 @@ function printFactors(n) {
   process.stdout.write("\n");
 }
 
-// console.log(printFactors(5));
-// console.log(printFactors(15));
-// console.log(printFactors(20));
+console.log(printFactors(5));
+console.log(printFactors(15));
+console.log(printFactors(20));
 
 // Sum of Even and Odd Numbers in a Range
 
@@ -92,45 +92,45 @@ function sumEvenOddInRange(start, end) {
   return [sumOfEven, sumOfOdd];
 }
 
-// console.log(sumEvenOddInRange(1, 5));
-// console.log(sumEvenOddInRange(2, 10));
+console.log(sumEvenOddInRange(1, 5));
+console.log(sumEvenOddInRange(2, 10));
 
-// let sum = 0;
-// for (let i = 0; i <= 5; i++) {
-//   sum += i;
-// }
-// console.log(sum);
+let sum = 0;
+for (let i = 0; i <= 5; i++) {
+  sum += i;
+}
+console.log(sum);
 
-// let i = 0;
-// for (; i < 5; ) {
-//   i++;
-//   console.log(i);
-// }
+let i = 0;
+for (; i < 5; ) {
+  i++;
+  console.log(i);
+}
 
 let count = 0;
 for (let i = 2; i <= 20; i += 3) {
   count++;
 }
-// console.log(count);
+console.log(count);
 
 // Check if a number is Prime
 
-// function isPrime(num) {
-//   if (num <= 1) return "Not Prime";
-//   if (num === 2) return "Prime";
-//   if (num % 2 === 0) return "Not Prime";
+function isPrime(num) {
+  if (num <= 1) return "Not Prime";
+  if (num === 2) return "Prime";
+  if (num % 2 === 0) return "Not Prime";
 
-//   for (let i = 3; i * i <= num; i += 2) {
-//     if (num % i === 0) return "Not Prime";
-//   }
+  for (let i = 3; i * i <= num; i += 2) {
+    if (num % i === 0) return "Not Prime";
+  }
 
-//   return "Prime";
-// }
+  return "Prime";
+}
 
-// console.log(isPrime(7));
-// console.log(isPrime(10));
-// console.log(isPrime(9));
-// console.log(isPrime(15));
+console.log(isPrime(7));
+console.log(isPrime(10));
+console.log(isPrime(9));
+console.log(isPrime(15));
 
 // let i = 10;
 // while (i % 3 !== 0) {
@@ -150,8 +150,8 @@ function calculatePower(a, b) {
   return calculatedPower;
 }
 
-// console.log(calculatePower(2, 3));
-// console.log(calculatePower(5, 0));
+console.log(calculatePower(2, 3));
+console.log(calculatePower(5, 0));
 
 // Check if a Number is Strong
 
@@ -175,8 +175,8 @@ function factorial(n) {
   return result;
 }
 
-// console.log(isStrongNumber(145));
-// console.log(isStrongNumber(123));
+console.log(isStrongNumber(145));
+console.log(isStrongNumber(123));
 
 // let x = 1;
 // while (true) {
@@ -198,8 +198,8 @@ function sumOfDigits(n) {
   return sum;
 }
 
-// console.log(sumOfDigits(936));
-// console.log(sumOfDigits(1234));
+console.log(sumOfDigits(936));
+console.log(sumOfDigits(1234));
 
 // Check if a number is automorphic
 
@@ -210,9 +210,9 @@ function isAutomorphic(n) {
   else return "No";
 }
 
-// console.log(isAutomorphic(25));
-// console.log(isAutomorphic(5));
-// console.log(isAutomorphic(7));
+console.log(isAutomorphic(25));
+console.log(isAutomorphic(5));
+console.log(isAutomorphic(7));
 
 // Reverse a Number
 
@@ -226,9 +226,9 @@ function reverseNumber(n) {
   return rev;
 }
 
-// console.log(reverseNumber(1234));
-// console.log(reverseNumber(1005));
-// console.log(reverseNumber(589));
+console.log(reverseNumber(1234));
+console.log(reverseNumber(1005));
+console.log(reverseNumber(589));
 
 // Harshad Number (Niven Number) Check
 
@@ -245,10 +245,10 @@ function isHarshad(nStr) {
   else return "Not Harshad Number";
 }
 
-// console.log(isHarshad(18));
-// console.log(isHarshad(20));
-// console.log(isHarshad(10));
-// console.log(isHarshad(21));
+console.log(isHarshad(18));
+console.log(isHarshad(20));
+console.log(isHarshad(10));
+console.log(isHarshad(21));
 
 // Abundant Number Checker
 
@@ -272,10 +272,10 @@ function isAbundant(nStr) {
   else return "No";
 }
 
-// console.log(isAbundant(12));
-// console.log(isAbundant(15));
-// console.log(isAbundant(18));
-// console.log(isAbundant(28));
+console.log(isAbundant(12));
+console.log(isAbundant(15));
+console.log(isAbundant(18));
+console.log(isAbundant(28));
 
 // Finding Prime Factors of a Number
 
@@ -312,10 +312,10 @@ function primeFactors(nStr) {
   return result;
 }
 
-// console.log(primeFactors(0));
-// console.log(primeFactors(1));
-// console.log(primeFactors(60));
-// console.log(primeFactors(45));
+console.log(primeFactors(0));
+console.log(primeFactors(1));
+console.log(primeFactors(60));
+console.log(primeFactors(45));
 
 // Check if a number is a Neon Number:
 
@@ -331,8 +331,8 @@ function isNeonNumber(nStr) {
   else return "No";
 }
 
-// console.log(isNeonNumber(9));
-// console.log(isNeonNumber(10));
+console.log(isNeonNumber(9));
+console.log(isNeonNumber(10));
 
 // Armstrong Number Checker
 
