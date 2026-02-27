@@ -103,3 +103,23 @@ function dailyPlanner() {
 }
 
 dailyPlanner();
+
+function motivationalQuote() {
+  const motivationalQuoteContent = document.querySelector(".motivation-2 h1");
+  const motivationAuthor = document.querySelector(".motivation-3 h2");
+
+  async function fetchQuote() {
+    const response = await fetch(
+      "https://api.freeapi.app/api/v1/public/quotes/quote/random",
+    );
+    const json = await response.json();
+    const data = await json.data;
+
+    motivationalQuoteContent.innerHTML = data.content;
+    motivationAuthor.innerHTML = `- ${data.author}`;
+  }
+
+  fetchQuote();
+}
+
+motivationalQuote();
