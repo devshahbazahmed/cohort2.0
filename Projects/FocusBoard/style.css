@@ -4,18 +4,20 @@
   --tertiary: #dbe2ef;
   --base: #3f72af;
   --red: red;
+  --green: rgb(8, 108, 63);
+  --blue: rgb(7, 109, 203);
 }
 
 @font-face {
   font-family: aeonik;
   font-family: 500;
-  src: url(./fonnts.com-Aeonik-Regular.ttf);
+  src: url(./assets/fonts/fonnts.com-Aeonik-Regular.ttf);
 }
 
 @font-face {
   font-family: aeonik;
   font-family: 700;
-  src: url(./fonnts.com-Aeonik-Bold.ttf);
+  src: url(./assets/fonts/fonnts.com-Aeonik-Bold.ttf);
 }
 
 * {
@@ -317,7 +319,6 @@ section.all-elems {
 /* Motivational Quotes */
 
 .motivation-fullpage {
-  display: block;
   position: relative;
 }
 
@@ -409,4 +410,57 @@ section.all-elems {
   right: 5%;
   opacity: 0.5;
   height: 120px;
+}
+
+/* Pomodoro Timer */
+
+.pomodoro-timer-fullpage {
+  position: relative;
+}
+
+.pomodoro-timer-fullpage h2 {
+  font-size: 65px;
+}
+
+.pomodoro-timer-fullpage .pomo-timer {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.pomo-timer h1 {
+  font-size: 170px;
+  font-weight: 700;
+}
+
+.pomo-timer button {
+  background-color: var(--tertiary);
+  color: var(--base);
+  border: none;
+  padding: 20px 40px;
+  font-size: 35px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px black;
+  transition: all ease 0.2s;
+  font-weight: 700;
+}
+
+.pomo-timer button:active {
+  scale: 0.95;
+  box-shadow: 0px 0px 0px black;
+}
+
+.pomodoro-timer-fullpage .session {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: var(--green);
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-size: 30px;
 }

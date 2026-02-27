@@ -78,7 +78,7 @@ function dailyPlanner() {
   let wholeDaySum = "";
   let hours = Array.from(
     { length: 18 },
-    (_, idx) => `${6 + idx}:00 - ${7 + idx}:00`,
+    (_, idx) => `${6 + idx}:00 - ${7 + idx}:00`
   );
 
   hours.forEach(function (elem, idx) {
@@ -110,7 +110,7 @@ function motivationalQuote() {
 
   async function fetchQuote() {
     const response = await fetch(
-      "https://api.freeapi.app/api/v1/public/quotes/quote/random",
+      "https://api.freeapi.app/api/v1/public/quotes/quote/random"
     );
     const json = await response.json();
     const data = await json.data;
@@ -123,3 +123,71 @@ function motivationalQuote() {
 }
 
 motivationalQuote();
+
+function pomodoroTimer() {
+  const timer = document.querySelector(".pomo-timer h1");
+  const startBtn = document.querySelector(".pomo-timer .start-timer");
+  const pauseBtn = document.querySelector(".pomo-timer .pause-timer");
+  const resetBtn = document.querySelector(".pomo-timer .reset-timer");
+  const session = document.querySelector(".pomodoro-timer-fullpage .session");
+
+  let timerInterval = null;
+  let totalSeconds = 25 * 60;
+  let isWorkSession = true;
+
+  function updateTimer() {
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+
+    timer.innerHTML = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+
+  function startTimer() {
+    clearInterval(timerInterval);
+    if (isWorkSession) {
+      timerInterval = setInterval(function () {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          updateTimer();
+        } else {
+          isWorkSession = false;
+          clearInterval(timerInterval);
+          timer.innerHTML = "05:00";
+          session.innerHTML = "Take a Break";
+          session.style.backgroundColor = "var(--blue)";
+          totalSeconds = 5 * 60;
+        }
+      }, 1000);
+    } else {
+      timerInterval = setInterval(function () {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          updateTimer();
+        } else {
+          isWorkSession = true;
+          clearInterval(timerInterval);
+          timer.innerHTML = "25:00";
+          session.innerHTML = "Work Session";
+          session.style.backgroundColor = "var(--green)";
+          totalSeconds = 25 * 60;
+        }
+      }, 1000);
+    }
+  }
+
+  function pauseTimer() {
+    clearInterval(timerInterval);
+  }
+
+  function resetTimer() {
+    totalSeconds = 25 * 60;
+    clearInterval(timerInterval);
+    updateTimer();
+  }
+
+  startBtn.addEventListener("click", startTimer);
+  pauseBtn.addEventListener("click", pauseTimer);
+  resetBtn.addEventListener("click", resetTimer);
+}
+
+pomodoroTimer();
