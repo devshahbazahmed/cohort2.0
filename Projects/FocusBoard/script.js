@@ -18,55 +18,55 @@ function openFeatures() {
 
 openFeatures();
 
-let currentTasks = [
-  {
-    task: "BreakFast",
-    details: "Eat Breakfast",
-    imp: true,
-  },
-  {
-    task: "Record Reel",
-    details: "Record Reel",
-    imp: true,
-  },
-  {
-    task: "Lunch",
-    details: "Eat Lunch",
-    imp: false,
-  },
-];
+function todoList() {
+  let currentTasks = JSON.parse(localStorage.getItem("currentTasks")) || [];
 
-const taskForm = document.querySelector(".add-task form");
-const taskInput = document.querySelector(".add-task form input");
-const taskDetailsInput = document.querySelector(".add-task form textarea");
-const taskCheckBox = document.querySelector("#checkbox");
-const taskButton = document.querySelector(".add-task form button");
+  const taskForm = document.querySelector(".add-task form");
+  const taskInput = document.querySelector(".add-task form input");
+  const taskDetailsInput = document.querySelector(".add-task form textarea");
+  const taskCheckBox = document.querySelector("#checkbox");
+  const taskButton = document.querySelector(".add-task form button");
 
-function renderTask() {
-  let allTasks = document.querySelector(".all-tasks");
+  function renderTask() {
+    let allTasks = document.querySelector(".all-tasks");
 
-  let sum = "";
+    let sum = "";
 
-  currentTasks.forEach(function (elem) {
-    sum += `<div class="task">
-            <h5>${elem.task} <span class=${elem.imp}>imp</span></h5>
-            <button>Mark as completed</button>
-          </div>`;
-  });
+    currentTasks.forEach(function (elem, idx) {
+      sum += `<div class="task">
+              <h5>${elem.task} <span class=${elem.imp}>imp</span></h5>
+              <button id=${idx}>Mark as completed</button>
+            </div>`;
+    });
 
-  allTasks.innerHTML = sum;
-}
-renderTask();
+    allTasks.innerHTML = sum;
+    localStorage.setItem("currentTasks", JSON.stringify(currentTasks));
 
-taskForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  currentTasks.push({
-    task: taskInput.value,
-    details: taskDetailsInput.value,
-    imp: taskCheckBox.checked,
-  });
-
-  console.log(currentTasks);
+    document.querySelectorAll(".task button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        currentTasks.splice(btn.id, 1);
+        renderTask();
+      });
+    });
+  }
   renderTask();
-});
+
+  taskForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    currentTasks.push({
+      task: taskInput.value,
+      details: taskDetailsInput.value,
+      imp: taskCheckBox.checked,
+    });
+
+    localStorage.setItem("currentTasks", JSON.stringify(currentTasks));
+
+    taskInput.value = "";
+    taskDetailsInput.value = "";
+    taskCheckBox.checked = false;
+    renderTask();
+  });
+}
+
+todoList();

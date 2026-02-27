@@ -113,10 +113,6 @@ section.all-elems {
   scale: 0.95;
 }
 
-.todo-list-fullpage {
-  display: block;
-}
-
 .todo-list-fullpage h2 {
   font-size: 65px;
 }
