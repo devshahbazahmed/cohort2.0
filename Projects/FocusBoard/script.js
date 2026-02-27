@@ -70,3 +70,36 @@ function todoList() {
 }
 
 todoList();
+
+function dailyPlanner() {
+  const dayPlanner = document.querySelector(".day-planner");
+  let dayPlanData = JSON.parse(localStorage.getItem("dayPlanData")) || {};
+
+  let wholeDaySum = "";
+  let hours = Array.from(
+    { length: 18 },
+    (_, idx) => `${6 + idx}:00 - ${7 + idx}:00`,
+  );
+
+  hours.forEach(function (elem, idx) {
+    let savedData = dayPlanData[idx] || "";
+    wholeDaySum += `<div class="day-planner-time">
+      <p>${elem}</p>
+      <input id=${idx} type="text" placeholder="..." value=${savedData}>
+    </div>`;
+  });
+
+  dayPlanner.innerHTML = wholeDaySum;
+
+  let dayPlanInput = document.querySelectorAll(".day-planner input");
+
+  dayPlanInput.forEach(function (elem) {
+    elem.addEventListener("input", function () {
+      dayPlanData[elem.id] = elem.value;
+
+      localStorage.setItem("dayPlanData", JSON.stringify(dayPlanData));
+    });
+  });
+}
+
+dailyPlanner();
