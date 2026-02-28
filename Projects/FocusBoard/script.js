@@ -1,7 +1,7 @@
 function openFeatures() {
   const allElems = document.querySelectorAll(".elem");
   const fullElemPage = document.querySelectorAll(".full-elem");
-  const allFullElemsBackButton = document.querySelectorAll(".full-elem  .back");
+  const allFullElemsBackButton = document.querySelectorAll(".full-elem .back");
 
   allElems.forEach(function (elem) {
     elem.addEventListener("click", () => {
@@ -78,7 +78,7 @@ function dailyPlanner() {
   let wholeDaySum = "";
   let hours = Array.from(
     { length: 18 },
-    (_, idx) => `${6 + idx}:00 - ${7 + idx}:00`
+    (_, idx) => `${6 + idx}:00 - ${7 + idx}:00`,
   );
 
   hours.forEach(function (elem, idx) {
@@ -110,7 +110,7 @@ function motivationalQuote() {
 
   async function fetchQuote() {
     const response = await fetch(
-      "https://api.freeapi.app/api/v1/public/quotes/quote/random"
+      "https://api.freeapi.app/api/v1/public/quotes/quote/random",
     );
     const json = await response.json();
     const data = await json.data;
@@ -191,3 +191,82 @@ function pomodoroTimer() {
 }
 
 pomodoroTimer();
+
+function timeAndWeatherDisplay() {
+  const API_KEY = "3fe214c475a94b4eb7373340262802";
+  let city = "Mumbai";
+
+  const weatherInTemp = document.querySelector(".header2 h2");
+  const weatherCondition = document.querySelector(".header2 h4");
+  const heatIndex = document.querySelector(".header2 .heatIndex");
+  const humidity = document.querySelector(".header2 .humidity");
+  const wind = document.querySelector(".header2 .wind");
+  const locationName = document.querySelector(".header1 h4");
+  const currentDate = document.querySelector(".header1 h2");
+  const currentTimeAndDay = document.querySelector(".header1 h1");
+
+  async function getWeather() {
+    const response = await fetch(
+      `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`,
+    );
+    const data = await response.json();
+
+    weatherInTemp.innerHTML = `${data.current.temp_c.toFixed(1)}°C`;
+    weatherCondition.innerHTML = `${data.current.condition.text}`;
+
+    heatIndex.innerHTML = `Heat-Index: ${data.current.heatindex_c}%`;
+    humidity.innerHTML = `Humidity: ${data.current.humidity}%`;
+    wind.innerHTML = `Wind: ${data.current.wind_kph} km/h`;
+    locationName.innerHTML = `${data.location.name}, ${data.location.country}`;
+  }
+
+  getWeather();
+
+  function getDateAndTime() {
+    const weekDays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    const allMonths = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const date = new Date();
+
+    const todayDate = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+
+    let hours = String(date.getHours() % 12 || 12).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+    const ampm = date.getHours() % 12 || 12 > 12 ? "pm" : "am";
+
+    currentDate.innerHTML = `${todayDate} ${allMonths[month]}, ${year}`;
+
+    currentTimeAndDay.innerHTML = `${weekDays[date.getDay()]}, ${hours}:${minutes}:${seconds} ${ampm}`;
+  }
+
+  setInterval(() => {
+    getDateAndTime();
+  }, 1000);
+}
+
+timeAndWeatherDisplay();
