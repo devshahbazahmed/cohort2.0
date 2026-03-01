@@ -25,7 +25,6 @@ function todoList() {
   const taskInput = document.querySelector(".add-task form input");
   const taskDetailsInput = document.querySelector(".add-task form textarea");
   const taskCheckBox = document.querySelector("#checkbox");
-  const taskButton = document.querySelector(".add-task form button");
 
   function renderTask() {
     let allTasks = document.querySelector(".all-tasks");
@@ -53,6 +52,7 @@ function todoList() {
 
   taskForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    if (!taskInput.value || !taskDetailsInput.value) return;
 
     currentTasks.push({
       task: taskInput.value,
@@ -193,7 +193,7 @@ function pomodoroTimer() {
 pomodoroTimer();
 
 function timeAndWeatherDisplay() {
-  const API_KEY = "3fe214c475a94b4eb7373340262802";
+  const API_KEY = "";
   let city = "Mumbai";
 
   const weatherInTemp = document.querySelector(".header2 h2");
@@ -254,12 +254,12 @@ function timeAndWeatherDisplay() {
     const month = date.getMonth();
     const year = date.getFullYear();
 
-    let hours = String(date.getHours() % 12 || 12).padStart(2, "0");
+    let hours = String(date.getHours() % 12).padStart(2, "0");
     const minutes = String(date.getMinutes()).padStart(2, "0");
     const seconds = String(date.getSeconds()).padStart(2, "0");
-    const ampm = date.getHours() % 12 || 12 > 12 ? "pm" : "am";
+    const ampm = date.getHours() % 12 > 12 ? "am" : "pm";
 
-    currentDate.innerHTML = `${todayDate} ${allMonths[month]}, ${year}`;
+    currentDate.innerHTML = `${String(todayDate).padStart(2, "0")} ${allMonths[month]}, ${year}`;
 
     currentTimeAndDay.innerHTML = `${weekDays[date.getDay()]}, ${hours}:${minutes}:${seconds} ${ampm}`;
   }
@@ -270,3 +270,103 @@ function timeAndWeatherDisplay() {
 }
 
 timeAndWeatherDisplay();
+
+function changeTheme() {
+  const themeBtn = document.querySelector(".theme");
+  const rootElement = document.documentElement;
+  let flag = false;
+
+  themeBtn.addEventListener("click", function () {
+    if (flag) {
+      rootElement.style.setProperty("--primary", "#00ADB5");
+      rootElement.style.setProperty("--secondary", "#393E46");
+      rootElement.style.setProperty("--tertiary", "#EEEEEE");
+      rootElement.style.setProperty("--base", "#222831");
+      flag = false;
+    } else {
+      rootElement.style.setProperty("--primary", "#f9f7f7");
+      rootElement.style.setProperty("--secondary", "#112d4e");
+      rootElement.style.setProperty("--tertiary", "#dbe2ef");
+      rootElement.style.setProperty("--base", "#3f72af");
+      flag = true;
+    }
+  });
+}
+
+changeTheme();
+
+function dailyGoals() {
+  const goalInput = document.querySelector(".goal-input");
+  const goalDetails = document.querySelector(".goal-details");
+  const addGoalBtn = document.querySelector(".add-goal-btn");
+  const goalsForm = document.querySelector(".add-daily-goals form");
+
+  let goals = JSON.parse(localStorage.getItem("goals")) || [];
+
+  goals = goals.map((goal) => ({
+    ...goal,
+    completed: goal.completed || false,
+  }));
+
+  function renderGoals() {
+    const allGoals = document.querySelector(".all-goals");
+    let sum = "";
+    goals.forEach((goal, idx) => {
+      sum += `<div class="new-goal">
+        <h2 class="goal-title ${goal.completed ? "completed" : ""}">${goal.title}</h2>
+        <p class="goal-desc ${goal.completed ? "completed" : ""}">
+          ${goal.desc}
+        </p>
+        <div class="goal-btns" id=${idx}>
+          <button class="delete-goal" id=${idx}>Delete</button>
+          <button class="complete-goal" id=${idx}>${goal.completed ? "Undo" : "Complete"}</button>
+        </div>
+      </div>`;
+    });
+
+    allGoals.innerHTML = sum;
+    localStorage.setItem("goals", JSON.stringify(goals));
+
+    document.querySelectorAll(".delete-goal").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        goals.splice(btn.id, 1);
+        renderGoals();
+      });
+    });
+
+    document.querySelectorAll(".complete-goal").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const id = Number(btn.dataset.id);
+
+        if (!goals[id]) return;
+
+        goals[id].completed = !goals[id].completed;
+
+        renderGoals();
+      });
+    });
+  }
+  renderGoals();
+
+  goalsForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const title = goalInput.value;
+    const desc = goalDetails.value;
+
+    if (!title || !desc) return;
+
+    goals.push({
+      title,
+      desc,
+      completed: false,
+    });
+
+    localStorage.setItem("goals", JSON.stringify(goals));
+    renderGoals();
+
+    goalInput.value = "";
+    goalDetails.value = "";
+  });
+}
+
+dailyGoals();
