@@ -1,0 +1,45 @@
+#service-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 0;
+  padding: 0 20px;
+}
+
+#explore {
+  width: 33%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 30px;
+}
+
+#explore-title {
+  background-color: whitesmoke;
+  border: 1px solid gray;
+  padding: 10px 15px;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 400;
+  width: 110px;
+}
+
+#explore-content {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+#training {
+  width: 33%;
+}
+
+#access {
+  width: 33%;
+}
+
+#training > img,
+#access > img {
+  width: 400px;
+  height: 370px;
+}
