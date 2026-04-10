@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Washroom from "./components/Washroom.jsx";
 
 const App = () => {
