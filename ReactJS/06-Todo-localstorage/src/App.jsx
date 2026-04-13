@@ -7,20 +7,24 @@ const App = () => {
   const [role, setRole] = useState("");
   const [description, setDescription] = useState("");
 
-  const [allUsers, setAllUsers] = useState([]);
+  const localData = JSON.parse(localStorage.getItem("all-users")) || [];
+  console.log(localData);
+
+  const [allUsers, setAllUsers] = useState(localData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setAllUsers([
-      ...allUsers,
-      {
-        name,
-        imageURL,
-        role,
-        description,
-      },
-    ]);
+    const oldData = [...allUsers];
+    oldData.push({
+      name,
+      imageURL,
+      role,
+      description,
+    });
+
+    setAllUsers(oldData);
+    localStorage.setItem("all-users", JSON.stringify(oldData));
 
     setName("");
     setImageURL("");
@@ -31,9 +35,15 @@ const App = () => {
   const deleteHandler = (idx) => {
     const copyUsers = [...allUsers];
 
-    copyUsers.splice(idx, 1);
+    const conf = confirm("Do you really want to delete this user?");
+    if (conf) {
+      copyUsers.splice(idx, 1);
+    } else {
+      alert("Element not deleted");
+    }
 
     setAllUsers(copyUsers);
+    localStorage.setItem("all-users", JSON.stringify(copyUsers));
   };
 
   console.log(allUsers);
