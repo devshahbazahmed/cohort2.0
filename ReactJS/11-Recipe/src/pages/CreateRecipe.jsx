@@ -2,10 +2,13 @@ import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
 import { useContext } from "react";
 import { RecipeDataContext } from "../context/RecipeContext";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CreateRecipe = () => {
   const { data, setData } = useContext(RecipeDataContext);
   const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
 
   const SubmitHandler = (recipe) => {
     recipe.id = nanoid();
@@ -14,7 +17,9 @@ const CreateRecipe = () => {
     // copyData.push(recipe);
     // setData(copyData);
     setData([...data, recipe]);
+    toast.success("New recipe created");
     reset();
+    navigate("/recipes");
   };
 
   return (
@@ -41,30 +46,30 @@ const CreateRecipe = () => {
 
       <textarea
         className="block border-b outline-0 p-2"
-        {...register("description")}
+        {...register("desc")}
         placeholder="//start from here"
       ></textarea>
 
       <textarea
         className="block border-b outline-0 p-2"
-        {...register("ingredients")}
+        {...register("ingr")}
         placeholder="//write ingredients separated by comma"
       ></textarea>
 
       <textarea
         className="block border-b outline-0 p-2"
-        {...register("instructions")}
+        {...register("inst")}
         placeholder="//write instructions separated by comma"
       ></textarea>
 
       <select
         className="block border-b outline-0 p-2"
-        {...register("categories")}
+        {...register("category")}
       >
-        <option value="chinese">Chinese</option>
-        <option value="indian">Indian</option>
-        <option value="italian">Italian</option>
-        <option value="mexican">Mexican</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="lunch">Lunch</option>
+        <option value="supper">Supper</option>
+        <option value="dinner">Dinner</option>
       </select>
 
       <button className="block mt-5 bg-gray-900 px-4 py-2 rounded cursor-pointer">
