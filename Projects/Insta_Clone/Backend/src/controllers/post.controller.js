@@ -8,27 +8,7 @@ const imagekit = new Imagekit({
 });
 
 async function createPostController(req, res) {
-  console.log(req.body, req.file);
-
-  const token = req.cookies.token;
-
-  if (!token) {
-    return res.status(401).json({
-      message: 'Token not provided. Unauthorized access',
-    });
-  }
-
-  let decoded = null;
-
-  try {
-    decoded = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (error) {
-    return res.status(401).json({
-      message: 'User not authorized',
-    });
-  }
-
-  console.log(decoded);
+  // console.log(req.body, req.file);
 
   const file = await imagekit.files.upload({
     file: new toFile(Buffer.from(req.file.Buffer), 'file'),
@@ -39,7 +19,7 @@ async function createPostController(req, res) {
   const post = await PostModel.create({
     caption: req.body.caption,
     imgUrl: file.url,
-    user: decoded.id,
+    user: req.user.id,
   });
 
   res.status(201).json({
@@ -49,26 +29,7 @@ async function createPostController(req, res) {
 }
 
 async function getPostsController(req, res) {
-  const token = req.cookies.token;
-
-  if (!token) {
-    return res.status(401).json({
-      message: 'Unauthorized access',
-    });
-  }
-
-  let decoded;
-
-  try {
-    decoded = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (error) {
-    return res.status(401).json({
-      message: 'Invalid token',
-    });
-  }
-
-  const userId = decoded.id;
-
+  const userId = req.user.id;
   const posts = await PostModel.find({
     user: userId,
   });
@@ -80,24 +41,7 @@ async function getPostsController(req, res) {
 }
 
 async function getPostDetailsController(req, res) {
-  const token = req.cookies.token;
-
-  if (!token) {
-    return res.status(401).json({
-      message: 'Unauthorized access',
-    });
-  }
-
-  let decoded;
-  try {
-    decoded = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (error) {
-    return res.status(401).json({
-      message: 'Invalid token',
-    });
-  }
-
-  const userId = decoded.id;
+  const userId = req.user.id;
   const postId = req.params.postId;
 
   const post = await PostModel.findById(postId);
