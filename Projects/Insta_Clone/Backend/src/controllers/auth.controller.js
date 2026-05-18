@@ -1,6 +1,6 @@
+const UserModel = require('../models/user.model.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const UserModel = require('../models/user.model.js');
 
 async function registerController(req, res) {
   const { username, email, password, bio, profileImage } = req.body;
@@ -37,7 +37,11 @@ async function registerController(req, res) {
     { expiresIn: '1d' }
   );
 
-  res.cookie('token', token);
+  res.cookie('token', token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000,
+  });
 
   return res.status(201).json({
     message: 'User registered successfully',
@@ -88,7 +92,11 @@ async function loginController(req, res) {
     { expiresIn: '1d' }
   );
 
-  res.cookie('token', token);
+  res.cookie('token', token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000,
+  });
 
   return res.status(200).json({
     message: 'User logged in successfully',

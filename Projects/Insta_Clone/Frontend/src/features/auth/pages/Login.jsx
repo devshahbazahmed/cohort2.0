@@ -1,18 +1,34 @@
 import { useState } from 'react';
 import '../styles/form.scss';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../hooks/useAuth.js';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { handleLogin } = useAuth();
+  const navigate = useNavigate();
+
+  const { handleLogin, loading } = useAuth();
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
 
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    handleLogin(email, password).then((res) => console.log(res));
+    handleLogin(username, password)
+      .then((res) => {
+        console.log(res);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error(
+          error.response?.status,
+          error.response?.data || error.message
+        );
+      });
   }
   return (
     <main>
@@ -21,10 +37,10 @@ const Login = () => {
         <form onSubmit={handleFormSubmit}>
           <input
             type="text"
-            name="email"
-            placeholder="Enter Email"
-            value={email}
-            onInput={(e) => setEmail(e.target.value)}
+            name="username"
+            placeholder="Enter Username"
+            value={username}
+            onInput={(e) => setUsername(e.target.value)}
           />
           <input
             type="password"
