@@ -41,7 +41,7 @@ features/
 
 ---
 
-## 1) UI Layer (Presentation Layer)
+## 1. UI Layer (Presentation Layer)
 
 **Location**
 
@@ -96,7 +96,7 @@ const LoginPage = () => {
 
 ---
 
-## 2) Hooks Layer (Orchestration Layer)
+## 2. Hooks Layer (Orchestration Layer)
 
 **Location**
 
@@ -224,7 +224,7 @@ UI → Hook → API    (Login.jsx calls handleLogin(), hook handles the rest)
 
 ---
 
-## 3) State Layer (Global or Feature State)
+## 3. State Layer (Global or Feature State)
 
 **Location**
 
@@ -345,7 +345,7 @@ If you keep state passive:
 
 ---
 
-## 4) API Layer (Backend Communication Layer)
+## 4. API Layer (Backend Communication Layer)
 
 **Location**
 

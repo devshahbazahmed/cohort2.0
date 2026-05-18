@@ -101,7 +101,29 @@ async function loginController(req, res) {
   });
 }
 
+async function getUserController(req, res) {
+  const id = req.user.id;
+
+  const user = await UserModel.findById(id);
+
+  if (!user) {
+    return res.status(404).json({
+      message: 'User not found',
+    });
+  }
+
+  return res.status(200).json({
+    user: {
+      username: user.username,
+      email: user.email,
+      bio: user.bio,
+      profileImage: user.profileImage,
+    },
+  });
+}
+
 module.exports = {
   registerController,
   loginController,
+  getUserController,
 };
