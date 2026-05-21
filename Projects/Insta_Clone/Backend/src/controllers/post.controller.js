@@ -6,13 +6,14 @@ const LikeModel = require('../models/like.model.js');
 
 const imagekit = new Imagekit({
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
 });
 
 async function createPostController(req, res) {
   // console.log(req.body, req.file);
 
   const file = await imagekit.files.upload({
-    file: new toFile(Buffer.from(req.file.Buffer), 'file'),
+    file: await toFile(req.file.buffer, 'file'),
     fileName: 'test',
     folder: 'cohort-2-insta-clone-posts',
   });
@@ -89,9 +90,28 @@ async function likePostController(req, res) {
   });
 }
 
+async function getFeedController(req, res) {
+  const user = req.user;
+  const posts = await Promise.all(
+    (await PostModel.find().populate('user').lean()).map(async (post) => {
+      const isLiked = await LikeModel.findOne({
+        user: user.username,
+        post: post._id,
+      });
+      post.isLiked = !!isLiked;
+      return post;
+    })
+  );
+  return res.status(200).json({
+    message: 'Post fetched successfully',
+    posts,
+  });
+}
+
 module.exports = {
   createPostController,
   getPostsController,
   getPostDetailsController,
   likePostController,
+  getFeedController,
 };
