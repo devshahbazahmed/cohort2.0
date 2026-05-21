@@ -50,6 +50,17 @@ postRouter.post(
 );
 
 /**
+ * @route POST /api/post/unlike/:postId
+ * @description Unlike a post
+ * @access Private
+ */
+postRouter.post(
+  '/unlike/:postId',
+  identifyUser,
+  postController.unlikePostController
+);
+
+/**
  * @route GET /api/post/feed
  * @description Get all the post created in the DB
  * @access Private
