@@ -1,0 +1,48 @@
+const SongModel = require('../models/song.model.js');
+const storageService = require('../services/storage.service.js');
+const id3 = require('node-id3');
+
+async function uploadSong(req, res) {
+  const songBuffer = req.file.buffer;
+  const { mood } = req.body;
+  const tags = id3.read(songBuffer);
+
+  const [songFile, posterFile] = await Promise.all([
+    storageService.uploadFile({
+      buffer: songBuffer,
+      filename: tags.title + '.mp3',
+      folder: '/cohort-2/moodify/songs',
+    }),
+    storageService.uploadFile({
+      buffer: tags.image.imageBuffer,
+      filename: tags.title + '.jpeg',
+      folder: '/cohort-2/moodify/posters',
+    }),
+  ]);
+
+  const song = await SongModel.create({
+    url: songFile.url,
+    posterUrl: posterFile.url,
+    title: tags.title,
+    mood,
+  });
+
+  return res.status(201).json({
+    message: 'Song created successfully',
+    song,
+  });
+}
+
+async function getSong(req, res) {
+  const { mood } = req.query;
+  const song = await SongModel.findOne({
+    mood,
+  });
+
+  return res.status(200).json({
+    message: 'Song fetched successfully',
+    song,
+  });
+}
+
+module.exports = { uploadSong, getSong };
