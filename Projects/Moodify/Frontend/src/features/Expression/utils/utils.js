@@ -44,11 +44,11 @@ export const detect = ({
     console.log(jawOpen, browUp);
     let currentExpression = 'Neutral';
     if (smileLeft > 0.5 && smileRight > 0.5) {
-      currentExpression = 'Happy 😄';
+      currentExpression = 'happy';
     } else if (jawOpen > 0.6 && browUp > 0.5) {
-      currentExpression = 'Surprised 😲';
+      currentExpression = 'surprised';
     } else if (frownLeft > 0.0001 && frownRight > 0.0001) {
-      currentExpression = 'Sad 😢';
+      currentExpression = 'sad';
     }
     setExpression(currentExpression);
   }
