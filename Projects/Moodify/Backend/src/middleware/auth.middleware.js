@@ -1,23 +1,21 @@
-const BlacklistModel = require('../models/blacklist.model.js');
-const UserModel = require('../models/user.model.js');
-const jwt = require('jsonwebtoken');
+const BlacklistModel = require("../models/blacklist.model.js");
+const redis = require("../config/cache.js");
+const jwt = require("jsonwebtoken");
 
 async function authUser(req, res, next) {
   const token = req.cookies.token;
 
   if (!token) {
     return res.status(401).json({
-      message: 'Token not provided',
+      message: "Token not provided",
     });
   }
 
-  const isTokenBlacklisted = await BlacklistModel.findOne({
-    token,
-  });
+  const isTokenBlacklisted = await redis.get(token);
 
   if (isTokenBlacklisted) {
     return res.status(401).json({
-      message: 'Invalid token',
+      message: "Invalid token",
     });
   }
 
@@ -29,7 +27,7 @@ async function authUser(req, res, next) {
     next();
   } catch (error) {
     return res.status(401).json({
-      message: 'Invalid token',
+      message: "Invalid token",
     });
   }
 }

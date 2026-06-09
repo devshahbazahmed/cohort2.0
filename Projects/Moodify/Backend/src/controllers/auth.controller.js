@@ -1,7 +1,8 @@
-const UserModel = require('../models/user.model.js');
-const BlacklistModel = require('../models/blacklist.model.js');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const UserModel = require("../models/user.model.js");
+const BlacklistModel = require("../models/blacklist.model.js");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const redis = require("../config/cache.js");
 
 async function registerUser(req, res) {
   const { username, email, password } = req.body;
@@ -12,7 +13,7 @@ async function registerUser(req, res) {
 
   if (existignUser) {
     return res.status(400).json({
-      message: 'User with same username or email already exists',
+      message: "User with same username or email already exists",
     });
   }
 
@@ -27,13 +28,13 @@ async function registerUser(req, res) {
   const token = jwt.sign(
     { id: user._id, username: user.username },
     process.env.JWT_SECRET,
-    { expiresIn: '1d' }
+    { expiresIn: "1d" }
   );
 
-  res.cookie('token', token);
+  res.cookie("token", token);
 
   return res.status(201).json({
-    message: 'User registered successfully',
+    message: "User registered successfully",
     user: {
       id: user._id,
       username: user.username,
@@ -47,11 +48,11 @@ async function loginUser(req, res) {
 
   const user = await UserModel.findOne({
     $or: [{ email }, { username }],
-  }).select('+password');
+  }).select("+password");
 
   if (!user) {
     return res.status(400).json({
-      message: 'Invalid credentials',
+      message: "Invalid credentials",
     });
   }
 
@@ -59,20 +60,20 @@ async function loginUser(req, res) {
 
   if (!isPasswordValid) {
     return res.status(400).json({
-      message: 'Invalid credentials',
+      message: "Invalid credentials",
     });
   }
 
   const token = jwt.sign(
     { id: user._id, username: user.username },
     process.env.JWT_SECRET,
-    { expiresIn: '1d' }
+    { expiresIn: "1d" }
   );
 
-  res.cookie('token', token);
+  res.cookie("token", token);
 
   return res.status(200).json({
-    message: 'User logged in successfully',
+    message: "User logged in successfully",
     user: {
       id: user._id,
       username: user.username,
@@ -85,7 +86,7 @@ async function getMe(req, res) {
   const user = await UserModel.findById(req.user.id);
 
   return res.status(200).json({
-    message: 'User fetched successfully',
+    message: "User fetched successfully",
     user,
   });
 }
@@ -93,14 +94,20 @@ async function getMe(req, res) {
 async function logoutUser(req, res) {
   const token = req.cookies.token;
 
-  res.clearCookie('token');
+  res.clearCookie("token");
 
-  await BlacklistModel.create({
-    token,
-  });
+  /**
+   * key value pair
+   * js object {
+   * username: 'test',
+   * email: 'test@test.com',
+   * }
+   */
+
+  await redis.set(token, Date.now().toString(), "EX", 60 * 60);
 
   res.status(201).json({
-    message: 'Logout successful',
+    message: "Logout successful",
   });
 }
 
