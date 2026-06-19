@@ -1,0 +1,19 @@
+{
+  "name": "day-34-gen-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/mistralai": "^1.2.0",
+    "dotenv": "^17.4.2",
+    "langchain": "^1.5.0",
+    "readline-sync": "^1.4.10"
+  }
+}

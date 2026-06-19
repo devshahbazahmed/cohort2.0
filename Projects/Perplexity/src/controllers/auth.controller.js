@@ -169,7 +169,7 @@ export async function getMe(req, res) {
  * @query { token }
  */
 export async function verifyEmail(req, res) {
-  const token = req.query;
+  const token = req.query.token;
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
