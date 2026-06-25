@@ -23,7 +23,7 @@ export async function sendMessage(req, res) {
     role: 'user',
   });
 
-  const messages = await Message.find({ chat: chatId });
+  const messages = await Message.find({ chat: chatId || chat._id });
 
   const result = await generateResponse(messages);
 
