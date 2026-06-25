@@ -48,6 +48,7 @@ export const {
   setError,
   createNewChat,
   addNewMessage,
+  addMessages,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;
