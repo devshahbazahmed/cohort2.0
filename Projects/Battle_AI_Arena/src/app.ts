@@ -1,16 +1,10 @@
 import express from 'express';
-import useGraph from './services/graph.ai.service.js';
+import runGraph from '../src/ai/graph.ai.js';
 
 const app = express();
 
-app.get('/health', (_, res) => {
-  return res.status(200).json({
-    status: true,
-  });
-});
-
-app.post('/use-graph', async (req, res) => {
-  await useGraph('What is the capital of France?');
+app.get('/', async (req, res) => {
+  const result = await runGraph('Write an code for Factorial function in js');
 });
 
 export default app;
