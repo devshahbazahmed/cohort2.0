@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import AuthLayout from '../layouts/AuthLayout';
+import PublicRoute from '../protectedRoutes/PublicRoute';
+import ProtectedRoute from '../protectedRoutes/ProtectedRoute';
 import DashboardLayout from '../layouts/DashboardLayout';
 import LoginPage from '../../features/auth/ui/pages/LoginPage';
 import Dashboard from '../../features/dashboard/ui/pages/Dashboard';
@@ -18,25 +20,37 @@ const AppRoutes = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <AuthLayout />,
+      element: <PublicRoute />,
       children: [
         {
-          path: 'login',
-          element: <LoginPage />,
-        },
-        {
-          path: 'register',
-          element: <RegisterPage />,
+          path: '',
+          element: <AuthLayout />,
+          children: [
+            {
+              path: 'login',
+              element: <LoginPage />,
+            },
+            {
+              path: 'register',
+              element: <RegisterPage />,
+            },
+          ],
         },
       ],
     },
     {
       path: '/dashboard',
-      element: <DashboardLayout />,
+      element: <ProtectedRoute />,
       children: [
         {
-          index: true,
-          element: <Dashboard />,
+          path: '',
+          element: <DashboardLayout />,
+          children: [
+            {
+              index: true,
+              element: <Dashboard />,
+            },
+          ],
         },
       ],
     },

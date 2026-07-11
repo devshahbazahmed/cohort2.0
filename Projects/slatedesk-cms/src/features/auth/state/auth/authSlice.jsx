@@ -18,26 +18,27 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(loginEmployee.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(loginEmployee.fulfilled, (state, action) => {
-      state.employee = action.payload;
-      state.isLoading = false;
-    });
-    builder.addCase(loginEmployee.rejected, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(currentLoggedInEmployee.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(currentLoggedInEmployee.fulfilled, (state, action) => {
-      state.employee = action.payload;
-      state.isLoading = false;
-    });
-    builder.addCase(currentLoggedInEmployee.rejected, (state) => {
-      state.isLoading = false;
-    });
+    builder
+      .addCase(loginEmployee.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginEmployee.fulfilled, (state, action) => {
+        state.employee = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(loginEmployee.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(currentLoggedInEmployee.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(currentLoggedInEmployee.fulfilled, (state, action) => {
+        state.employee = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(currentLoggedInEmployee.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 
