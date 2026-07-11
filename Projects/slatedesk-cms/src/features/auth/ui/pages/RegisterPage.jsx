@@ -13,7 +13,7 @@ const inputStyles = `
   outline-none transition duration-200
   placeholder:text-[#5f5a68]
   hover:border-[#5d5669]
-  focus:border-[#a98be8]
+  focus:border-[#FE7F2D]
   focus:ring-2 focus:ring-[#9d7adb]/20
 `;
 
@@ -213,7 +213,7 @@ export default function RegisterPage() {
                 disabled={isSubmitting}
                 className="
                   flex h-14 w-full items-center justify-center rounded-lg
-                  bg-linear-to-r from-[#7659b7] to-[#c4a9ff]
+                  bg-[#FE7F2D]
                   px-5 text-base font-semibold text-[#21113c]
                   shadow-[0_14px_35px_rgba(138,105,199,0.18)]
                   transition duration-200

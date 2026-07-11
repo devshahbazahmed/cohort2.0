@@ -6,7 +6,7 @@ export default function Footer() {
           href="/"
           className="text-xl font-semibold tracking-[-0.04em] text-[#f1edf5]"
         >
-          Synthetix AI
+          <img src="/main-logo.png" alt="slatedesk" width={200} height={150} />
         </a>
 
         <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">

@@ -1,6 +1,5 @@
-import { Cloud, Eye, EyeOff, LogIn, Network } from 'lucide-react';
+import { Cloud, Eye, EyeOff, LogIn } from 'lucide-react';
 import useAuth from '../../hooks/useAuth.js';
-import BackgroundOrb from '../components/BackgroundOrb.jsx';
 import Divider from '../components/Divider.jsx';
 import DecorativeCard from '../components/DecorativeCard.jsx';
 import FormField from '../components/FormField.jsx';
@@ -13,8 +12,8 @@ const inputClassName = `
   outline-none transition
   placeholder:text-[#575260]
   hover:border-[#4c4655]
-  focus:border-[#8767c3]
-  focus:ring-2 focus:ring-[#8767c3]/20
+  focus:border-[#FE7F2D]
+  focus:ring-2 focus:ring-[#FE7F2D]/20
 `;
 
 export default function LoginPage() {
@@ -32,13 +31,10 @@ export default function LoginPage() {
   } = useAuth();
   return (
     <main className="relative min-h-screen overflow-hidden bg-black px-4 py-10 text-white sm:px-8 lg:px-12">
-      <BackgroundOrb className="-left-36 bottom-30 h-135 w-135" />
-      <BackgroundOrb className="-right-24 -top-40 h-150 w-150" />
-
       <section
         className="
           relative z-10 mx-auto flex min-h-[calc(100vh-80px)]
-          max-w-295 items-center justify-center overflow-hidden
+          max-w-375 items-center justify-center overflow-hidden
           border border-white/3
           bg-[#121017]
           px-5 py-12
@@ -68,16 +64,16 @@ export default function LoginPage() {
             <header className="mb-8 text-center">
               <div
                 className="
-                  mx-auto mb-4 flex size-12 items-center justify-center
-                  rounded-lg bg-[#7455b5]
+                  mx-auto mb-4 flex size-20 items-center justify-center
+                  rounded-lg bg-black
                   shadow-[0_8px_30px_rgba(116,85,181,0.3)]
                 "
               >
-                <Network className="size-6 text-[#e4d8ff]" />
+                <img src="/favicon.png" alt="slatedesk" />
               </div>
 
-              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-[#f3eff7]">
-                Synthetix AI
+              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-white">
+                Slate<span className="text-[#FE7F2D]">Desk</span>
               </h1>
 
               <p className="mt-1 text-sm text-[#aaa4b0]">
@@ -173,10 +169,10 @@ export default function LoginPage() {
                       absolute inset-0 rounded-[3px]
                       border border-[#37313e] bg-[#0e0c14]
                       transition
-                      peer-checked:border-[#8365bc]
-                      peer-checked:bg-[#8365bc]
+                      peer-checked:border-[#FE7F2D]
+                      peer-checked:bg-[#FE7F2D]
                       peer-focus-visible:ring-2
-                      peer-focus-visible:ring-[#8365bc]/40
+                      peer-focus-visible:ring-[#FE7F2D]/40
                     "
                   />
 
@@ -197,11 +193,11 @@ export default function LoginPage() {
                 disabled={isSubmitting}
                 className="
                   mt-7 flex h-12 w-full items-center justify-center gap-2
-                  rounded-md bg-[#7354b2]
+                  rounded-md bg-[#FE7F2D]
                   text-sm font-medium text-[#f2ebff]
                   shadow-[0_10px_30px_rgba(115,84,178,0.23)]
                   transition
-                  hover:bg-[#8160c2]
+                  hover:bg-[#FE&F23]
                   focus:outline-none focus:ring-2
                   focus:ring-[#a585df]
                   focus:ring-offset-2 focus:ring-offset-[#1c191f]

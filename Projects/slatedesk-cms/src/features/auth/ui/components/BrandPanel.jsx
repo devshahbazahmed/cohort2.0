@@ -28,11 +28,11 @@ export default function BrandPanel() {
           href="/"
           className="text-xl font-semibold tracking-[-0.04em] text-white"
         >
-          Synthetix AI
+          <img src="/main-logo.png" alt="slatedesk" />
         </a>
 
         <div className="max-w-107.5 pb-2">
-          <div className="mb-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#c3abf2]">
+          <div className="mb-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#FE7F2D]">
             <Sparkles className="size-4" />
             Next-gen intelligence
           </div>
