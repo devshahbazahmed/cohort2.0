@@ -40,18 +40,27 @@
     --tertiary: #fe7f2d;
     --success: #16a34a;
     --warning: #ca8a04;
-    --danger: #dc2626; /* Backgrounds */
+    --danger: #dc2626;
+
+    /* Backgrounds */
     --bg-main: #f8fafc;
     --bg-surface: #ffffff;
     --bg-card: #e2e8f0;
-    --bg-hover: #dbe4f0; /* Text */
+    --bg-hover: #dbe4f0;
+
+    /* Text */
     --text-primary: #0f172a;
     --text-secondary: #334155;
     --text-muted: #64748b;
+
     /* Border */
-    --border-color: #cbd5e1; /* Shadow */
+    --border-color: #cbd5e1;
+
+    /* Shadow */
     --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.8);
-  } /* GLOBAL STYLES */
+  }
+
+  /* GLOBAL STYLES */
   body {
     background: var(--bg-main);
     color: var(--text-primary);
