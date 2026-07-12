@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background-color: black;
+}
+
+.box,
+.box1,
+.box2,
+.box3 {
+  height: 300px;
+  width: 300px;
+  margin-bottom: 1rem;
+}
+
+.box {
+  background-color: red;
+}
+
+.box1 {
+  background-color: yellow;
+}
+
+.box2 {
+  background-color: green;
+}
+
+.box3 {
+  background-color: magenta;
+}
+
+/* #app {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.heading {
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 10rem;
+  line-height: 0.9;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+span {
+  display: inline-block;
+} */
