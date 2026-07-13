@@ -1,6 +1,10 @@
 import gsap from 'gsap';
 import './style.css';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+import { Draggable } from 'gsap/Draggable';
+import { InertiaPlugin } from 'gsap/InertiaPlugin';
+import { Flip } from 'gsap/Flip';
 
 // const play = document.querySelector('.play');
 // const pause = document.querySelector('.pause');
@@ -82,39 +86,67 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // master.add(loadingTimeline, navbarTimeline);
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
-gsap.set('.imageDiv', {
-  scale: 0.3,
+// gsap.set('.imageDiv', {
+//   scale: 0.3,
+// });
+
+// gsap.set('.content', {
+//   gap: '80rem',
+// });
+
+// const tl = gsap.timeline({
+//   scrollTrigger: {
+//     trigger: '.page2',
+//     start: 'top top',
+//     end: 'top -40%',
+//     scrub: 2,
+//     pin: true,
+//     onEnter: () => {},
+//     onLeave: () => {},
+//     onUpdate: () => {},
+//     onEnterBack: () => {},
+//     onLeaveBack: () => {},
+//   },
+// });
+
+// tl.to('.imageDiv', {
+//   scale: 1,
+//   ease: 'power2.out',
+// }).to(
+//   '.content',
+//   {
+//     gap: '7rem',
+//   },
+//   '<'
+// );
+
+// gsap.registerPlugin(SplitText);
+
+// const split = new SplitText('.title h1', {
+//   type: 'chars,words,lines',
+//   wordsClass: 'titleWord',
+//   charsClass: 'titleChar',
+// });
+
+// gsap.from(split.chars, {
+//   yPercent: 100,
+//   opacity: 0,
+//   duration: 1.2,
+//   ease: 'expo.out',
+//   stagger: {
+//     each: 0.04,
+//     from: 'edges',
+//   },
+// });
+
+gsap.registerPlugin(Draggable, InertiaPlugin, Flip, ScrollTrigger, SplitText);
+
+Draggable.create('.box', {
+  bounds: '#app',
+  type: 'x, y',
+  edgeResistance: 1,
+  inertia: true,
+  dragResistance: true,
 });
-
-gsap.set('.content', {
-  gap: '80rem',
-});
-
-const tl = gsap.timeline({
-  scrollTrigger: {
-    trigger: '.page2',
-    start: 'top top',
-    end: 'top -40%',
-    scrub: 2,
-    pin: true,
-    // onEnter: () => {},
-    // onLeave: () => {},
-    // onUpdate: () => {},
-    // onEnterBack: () => {},
-    // onLeaveBack: () => {},
-  },
-});
-
-tl.to('.imageDiv', {
-  scale: 1,
-  // duration: 1.3,
-  ease: 'power2.out',
-}).to(
-  '.content',
-  {
-    gap: '7rem',
-  },
-  '<'
-);
