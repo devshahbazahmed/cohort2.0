@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+#root {
+  background-color: black;
+  color: white;
+}
+
+.box {
+  height: 300px;
+  width: 300px;
+  background-color: red;
+}
+
+.page {
+  height: 100vh;
+  width: 100%;
+}
+
+.box1 {
+  height: 300px;
+  width: 300px;
+  background-color: blue;
+}
