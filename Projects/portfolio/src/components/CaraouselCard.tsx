@@ -5,9 +5,10 @@ import TextReveal, { TextRevealHandle } from './TextReveal';
 import { CaraouselCardProps } from '../types';
 import Image from 'next/image';
 import gsap from '../libs/gsap';
+import useViewTransition from '../hooks/useViewTransition';
 
-const CARD_W = 300;
-const CARD_H = 380;
+const CARD_W = 400;
+const CARD_H = 490;
 const CARD_SCALE = 1.35;
 
 const CaraouselCard = ({
@@ -26,8 +27,14 @@ const CaraouselCard = ({
     gsap.to(cardRef.current, {
       width: CARD_W * CARD_SCALE,
       height: CARD_H * CARD_SCALE,
-      duration: 0.45,
+      duration: 0.25,
       ease: 'power3.out',
+    });
+
+    gsap.to(imgRef.current, {
+      scale: 1,
+      duration: 0.22,
+      ease: 'expo.out',
     });
 
     numberRef.current?.play();
@@ -40,15 +47,28 @@ const CaraouselCard = ({
     gsap.to(cardRef.current, {
       width: CARD_W,
       height: CARD_H,
-      duration: 0.24,
+      duration: 0.17,
       ease: 'power3.out',
+    });
+
+    gsap.to(imgRef.current, {
+      scale: 1.6,
+      duration: 0.19,
+      ease: 'expo.out',
     });
 
     numberRef.current?.reverse();
     titleRef.current?.reverse();
   };
+
+  const navigateTo = useViewTransition({ href: `/project/${project.slug}` });
+
+  const handleClick = () => {
+    navigateTo();
+  };
   return (
     <div
+      onClick={handleClick}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       ref={cardRef}
@@ -63,16 +83,26 @@ const CaraouselCard = ({
     >
       {/* Title Panel */}
       <div
-        style={{ bottom: 'calc(100% + 3rem)' }}
-        className="titlePanel absolute left-0 pointer-events-none flex gap-[1rem] flex-col"
+        style={{ bottom: 'calc(100% + 1.5rem)' }}
+        className="titlePanel absolute left-0 pointer-events-none flex gap-[0.8rem] flex-col"
       >
-        <TextReveal ref={numberRef} trigger="manual" splitBy="chars">
-          <h3 className="text-[1rem] uppercase text-[#010101]">
+        <TextReveal
+          ref={numberRef}
+          duration={0.25}
+          trigger="manual"
+          splitBy="chars"
+        >
+          <h3 className="text-[1.2rem] uppercase text-[#f0f0f0]">
             {project.number}
           </h3>
         </TextReveal>
-        <TextReveal ref={titleRef} trigger="manual" splitBy="words">
-          <h3 className="text-[1rem] uppercase text-[#010101]">
+        <TextReveal
+          ref={titleRef}
+          duration={0.25}
+          trigger="manual"
+          splitBy="words"
+        >
+          <h3 className="text-[1.2rem] uppercase text-[#f0f0f0]">
             {project.title}
           </h3>
         </TextReveal>
@@ -86,7 +116,7 @@ const CaraouselCard = ({
           width={20}
           height={20}
           ref={imgRef}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover scale-[1.6]"
           style={{ transformOrigin: 'center center', userSelect: 'none' }}
         />
       </div>

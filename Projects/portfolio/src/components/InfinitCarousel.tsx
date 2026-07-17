@@ -4,8 +4,8 @@ import { Project } from '../types';
 import CaraouselCard from './CaraouselCard';
 import gsap from '../libs/gsap';
 
-const CARD_W = 300;
-const CARD_H = 380;
+const CARD_W = 400;
+const CARD_H = 490;
 const CARD_SCALE = 1.35;
 const CARD_GAP = 20;
 const DURATION = 20;
