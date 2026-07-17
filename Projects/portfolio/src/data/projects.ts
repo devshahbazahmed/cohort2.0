@@ -1,4 +1,6 @@
-export const projects = [
+import { Project } from '../types';
+
+export const projects: Project[] = [
   {
     id: 1,
     slug: 'archive-ff24',

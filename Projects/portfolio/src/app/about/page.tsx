@@ -1,7 +1,12 @@
 import React from 'react';
+import TextReveal from '../../components/TextReveal';
 
 const About = () => {
-  return <div>About</div>;
+  return (
+    <div>
+      <TextReveal>About Section</TextReveal>
+    </div>
+  );
 };
 
 export default About;

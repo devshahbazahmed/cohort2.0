@@ -1,11 +1,10 @@
-import React from 'react';
+import InfinitCarousel from '../components/InfinitCarousel';
+import { projects } from '../data/projects';
 
 const Home = () => {
   return (
-    <main className="h-[300vh] w-full">
-      <h1 className="text-[16rem]">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, mollitia!
-      </h1>
+    <main className="h-screen w-full flex items-center text-white">
+      <InfinitCarousel projects={projects} />
     </main>
   );
 };
