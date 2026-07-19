@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #010101;
+  color: #f0f0f0;
+}
+
+.parent {
+  height: 100vh;
+  width: 100%;
+}
