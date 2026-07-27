@@ -1,4 +1,5 @@
 import { axiosInstance } from './config/axiosInstance';
+import AppRoutes from './routes/AppRoutes';
 
 const App = () => {
   const getData = async () => {
@@ -13,7 +14,7 @@ const App = () => {
   getData();
   return (
     <div>
-      <h1>Heyyy there</h1>
+      <AppRoutes />
     </div>
   );
 };
