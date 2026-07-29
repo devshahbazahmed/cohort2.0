@@ -6,7 +6,7 @@ interface UserDocument extends Omit<IUser, '_id'>, Document {
   comparePassword(candidatePassword: string): boolean;
 }
 
-const userSchema = new mongoose.Schema<IUser>(
+const userSchema = new mongoose.Schema<UserDocument>(
   {
     name: {
       type: String,
@@ -45,6 +45,6 @@ userSchema.methods.comparePassword = function (
   return bcrypt.compareSync(candidatePassword, this.password);
 };
 
-const UserModel = mongoose.model('User', userSchema);
+const UserModel = mongoose.models.User || mongoose.model('User', userSchema);
 
 export default UserModel;
