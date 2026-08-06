@@ -99,4 +99,78 @@ function animate2() {
   }
   requestAnimationFrame(animate2);
 }
-animate2();
+// animate2();
+
+// image trail effect
+
+const zone = document.querySelector('[data-trail-zone]');
+const layer = document.getElementById('trail-layer');
+
+const images = [
+  'https://images.unsplash.com/photo-1785788684002-f500e756047d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8',
+  'https://images.unsplash.com/photo-1768541089409-7d3c0bc386eb?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNnx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1785369989063-5512d5716735?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyMHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1785867428018-d5070e925d7a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D',
+];
+
+// pre-create a fixed pool of elements and reuse them -
+// cheaper than creating a new <img> on every mousemove
+const POOL_SIZE = 8;
+const pool = [];
+for (let i = 0; i < POOL_SIZE; i++) {
+  const el = document.createElement('div');
+  el.className = 'trail-item';
+  const image = document.createElement('img');
+  image.src = images[i % images.length];
+  el.appendChild(img);
+  layer.appendChild(el);
+  pool.push(el);
+}
+
+let poolIndex = 0;
+let lastX = null,
+  lastY = null;
+let inside = false;
+
+zone.addEventListener('mouseenter', () => {
+  inside = true;
+});
+zone.addEventListener('mouseleave', () => {
+  inside = false;
+  lastX = null;
+  lastY = null;
+});
+
+window.addEventListener('mousemove', (e) => {
+  if (!inside) return;
+  if (lastX === null) {
+    lastX = e.clientX;
+    lastY = e.clientY;
+  }
+
+  // only spawn once the cursor has moved far enough -- keeps the trail spaced out
+  if (dist(e.clientX, e.clientY, lastX, lastY) < 60) return;
+  lastX = e.clientX;
+  lastY = e.clientY;
+
+  const el = pool[poolIndex % POOL_SIZE];
+  poolIndex++;
+  const rot = (Math.random() * 16 - 8).toFixed(1);
+
+  el.classList.remove('show');
+  el.style.transition = 'none';
+  el.style.transform = `translate3d(${e.clientX - 75}px, ${e.clientY - 95}px, 0) scale(.6) rotate(${rot}deg)`;
+  void el.offsetWidth; // force reflow so the transition restarts
+
+  el.style.transition = '';
+  requestAnimationFrame(() => {
+    el.classList.add('show');
+    el.style.transform = `translate3d(${e.clientX - 75}px, ${e.clientY - 95}px, 0) scale(1) rotate(${rot}deg)`;
+  });
+
+  clearTimeout(el._hideTimer);
+  el._hideTimer = setTimeout(() => {
+    el.classList.remove('show');
+    el.style.transform += ' scale(0.8)';
+  }, 820);
+});
